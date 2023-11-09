@@ -10,7 +10,7 @@ import './App.css';
  * js 변수 및 문법은 중괄호 안에 작성 | 직접 스타일을 입력하거나, 변수에 스타일 선언하고 변수만 이용
  */
 
-function App() {
+function AppJSX() {
   const _name = '슈퍼짱짱 박인혜🔥';
   const _boxStyle = {
     display: 'flex',
@@ -44,4 +44,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppJSX;
