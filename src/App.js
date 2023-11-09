@@ -17,6 +17,8 @@ function App() {
         >
           Learn React
         </a>
+
+        <h1>슈퍼짱짱 인혜</h1>
       </header>
     </div>
   );
