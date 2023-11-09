@@ -4,14 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// 1. 랜더링: id가 root인 요소를 만들어서 랜더링 한다.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  // 2. strict mode: 자바스크립트의 strict 모드와 유사
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
