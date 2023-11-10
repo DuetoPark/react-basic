@@ -22,14 +22,21 @@ function AppProfile() {
     {
       avatar: "https://images.unsplash.com/photo-1598974357801-cbca100e65d3?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG9yc2V8ZW58MHx8MHx8fDA%3D",
       name: "똥패션 박인혜 🤩", 
-      desc: "패션센스는 없지만 옷빨은 죽이는 프론트엔드 개발자",
+      desc: "패션센스는 없지만 옷빨은 잘 받는 프론트엔드 개발자",
     },
   ];
 
+  const handleButton = (e) => {
+    console.log(e);
+    alert('부르셨습니까 아갓씌?🥸');
+  }
+  
   return (
     <>
+      <button onClick={handleButton}>🔔비밀버튼🔔</button>
+
       {_profileData.map(({avatar, name, desc, isNew}) => 
-        <Profile avatar={avatar} name={name} desc={desc} isNew={isNew && true} />
+        <Profile key={name} avatar={avatar} name={name} desc={desc} isNew={isNew && true} />
       )}
       
     </>
