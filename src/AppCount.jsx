@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Counter from './Components/Counter/Counter';
 
 /* [useState]
@@ -11,6 +11,8 @@ Returns a stateful value, and a function to update it.
 수식은 스코프에 의해 상태값을 찾아가지만,
 콜백함수는 스코프에 의해 지역함수 내부의 prev 값을 찾아감
 */
+
+// NOTE: 데이터의 덩어리를 나눈다
 
 export default function AppCount() {
   const _titleStyle = {
@@ -26,20 +28,16 @@ export default function AppCount() {
     fontWeight: '800',
   };
 
-  let [_count1, setCount1] = useState(0);
-  const plus1 = () => setCount1(_count1 + 1);
-  const minus1 = () => setCount1(_count1 - 1);
+  /* [단위가 큰 컴포넌트의 state]
+  콜백함수에 업데이트 함수를 담아서 props으로 전달
+  (total 값과 total 값 업데이트는 AppCount 내에서 선언하고 props로 넘겼음)
+  데이터의 독립성을 지키며 컴포넌트간의 협럭을 위함
+  */
 
+  let [_total, setTotal] = useState(0);
 
-  let [_count2, setCount2] = useState(0);
-  const plus2 = () => setCount2(_count2 + 1);
-  const minus2 = () => setCount2(_count2 - 1);
-
-  let [_total, setTotal] = useState(_count1 + _count2);
-
-  useEffect(() => {
-    setTotal(_count1 + _count2);
-  }, [_count1, _count2]);
+  const plus = () => {setTotal(prev => prev + 1)};
+  const minus = () => {setTotal(prev => prev - 1)};
 
   return (
     <>
@@ -49,20 +47,10 @@ export default function AppCount() {
         {_total < 10 ? '🎁' : '🎄'}
       </p>
 
-      <Counter
-        count={_count1}
-        plus={plus1}
-        minus={minus1}
-        total={_total}
-        isDisabled={_total <= 0 && true}
-      />
-      <Counter
-        count={_count2}
-        plus={plus2}
-        minus={minus2}
-        total={_total}
-        isDisabled={_total <= 0 && true}
-      />
+      <Counter plus={plus} minus={minus} total={_total} />
+      <Counter plus={plus} minus={minus} total={_total} />
+      <Counter plus={plus} minus={minus} total={_total} />
+      <Counter plus={plus} minus={minus} total={_total} />
     </>
   );
 }
