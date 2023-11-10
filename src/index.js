@@ -12,8 +12,6 @@ root.render(
   <React.StrictMode>
     {/* <AppProfile /> */}
     <AppCount />
-    <AppCount />
-
   </React.StrictMode>
 );
 
