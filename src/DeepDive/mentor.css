@@ -61,3 +61,13 @@
 .btn-box button:hover {
   background-color: #ddd;
 }
+
+.mentor-item {
+  padding: 16px 24px;
+  margin-bottom: 8px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: left;
+  font-size: 14px;
+}
