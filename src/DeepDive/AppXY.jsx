@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './xy.css';
 
 /* [clientX vs offsetX vs pageX vs screenX]
@@ -46,17 +46,21 @@ export default function AppXY() {
 - translate 값 변경
 */
 export default function AppXY() {
-  let [_x, setX] = useState(0);
-  let [_y, setY] = useState(0);
+  const [coord, setCoord] = useState({x: 0, y: 0, z: 0});
 
   const pointerHandler = (e) => {
-    setX(x => e.clientX);
-    setY(y => e.clientY);
+    // 수평만 이동
+    // NOTE: 객체 반환이기 때문에 소괄호()로 묶어준다. return 축약형
+    // setCoord(prev => ({x: e.clientX, y: prev.y}));
+
+    // 하나의 값만 변경
+    setCoord(prev => ({...prev, x: e.clientX}));
+
   }
 
   return (
     <section className='container' onPointerMove={pointerHandler}>
-      <div className='pointer' style={{transform: `translate(${_x}px, ${_y}px)`}}></div>
+      <div className='pointer' style={{transform: `translate(${coord.x}px, ${coord.y}px)`}}></div>
     </section>
   );
 }
