@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './App.css';
 import reportWebVitals from './reportWebVitals';
-import AppXY from './DeepDive/AppXY';
+import AppMentor from './DeepDive/AppMentor';
+// import AppXY from './DeepDive/AppXY';
 // import AppProfile from './Basic/AppProfile';
 // import AppCount from './Basic/AppCount';
 // import AppProduct from './Basic/AppProduct';
@@ -16,7 +17,8 @@ root.render(
     {/* <AppProfile /> */}
     {/* <AppCount /> */}
     {/* <AppProduct /> */}
-    <AppXY />
+    {/* <AppXY /> */}
+    <AppMentor />
   </React.StrictMode>
 );
 
