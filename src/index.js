@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './App.css';
 import reportWebVitals from './reportWebVitals';
-// import AppProfile from './AppProfile';
-// import AppCount from './AppCount';
-import AppProduct from './AppProduct';
+// import AppProfile from './Basic/AppProfile';
+// import AppCount from './Basic/AppCount';
+import AppProduct from './Basic/AppProduct';
 
 // 1. 랜더링: id가 root인 요소를 만들어서 랜더링 한다.
 const root = ReactDOM.createRoot(document.getElementById('root'));
