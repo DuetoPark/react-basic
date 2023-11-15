@@ -1,0 +1,15 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.pointer {
+  position: absolute;
+  left: -24px;
+  top: -24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  background-color: tomato;
+  /* transform: translate(-50%, -50%); */
+}
