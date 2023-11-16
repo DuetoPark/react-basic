@@ -1,0 +1,23 @@
+.avatar-box {
+  position: relative;
+}
+
+.avatar {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.new-tag {
+  position: absolute;
+  right: 8px;
+  top: 4px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  color: #333;
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  background-color: aquamarine;
+}
