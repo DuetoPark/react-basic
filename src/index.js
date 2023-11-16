@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import './App.css';
 import reportWebVitals from './reportWebVitals';
-import AppWrap from './DeepDive/AppWrap';
+import AppContext from './DeepDive/AppContext';
+// import AppWrap from './DeepDive/AppWrap';
 // import AppForm from './DeepDive/AppForm';
 // import AppMentors from './DeepDive/AppMentors';
 // import AppMentor from './DeepDive/AppMentor';
@@ -24,7 +25,8 @@ root.render(
     {/* <AppMentor /> */}
     {/* <AppMentors /> */}
     {/* <AppForm/> */}
-    <AppWrap />
+    {/* <AppWrap /> */}
+    <AppContext />
   </React.StrictMode>
 );
 
