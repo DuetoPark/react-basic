@@ -35,6 +35,32 @@ export default function AppMentors() {
     setPerson(_newData);
   };
 
+  const addData = () => {
+    const name = window.prompt('🥸 아갓씌, 새로운 분의 이름을 작성해주세요');
+    if (name === '') return;
+
+    const desc = window.prompt('🥸 아갓씌, 새로운 분의 설명을 작성해주세요');
+    if (desc === '') return;
+
+    const _newData = {..._person};
+    _newData.mentor.push({name, desc});
+
+    setPerson(_newData);
+  };
+
+  const deleteData = () => {
+    const _name = window.prompt('🥸 아갓씌, 집으로 돌아가실 분의 이름을 작성해주세요');
+    if (_name === '') return;
+
+    const _idx = _person.mentor.findIndex(_item => _item.name === _name);
+
+    if (window.confirm(`🥸 아갓씌, 정말 ${_name}님을 집으로 보내고 싶은가요?`)) {
+      const _newData = {..._person};
+      _newData.mentor.splice(_idx, 1);
+      setPerson(_newData);
+    }
+  };
+
   return (
     <section className='mentor'>
       <h1>{_person.name}는 {_person.desc}</h1>
@@ -50,10 +76,14 @@ export default function AppMentors() {
             <span className='desc'>{_item.desc}</span>
           </li>
         ))}
+        
+        {_person.mentor.length === 0 && <p className='empty'>Oops! 모두 집으로 귀가하셨습니다.</p>}
       </ol>
 
       <div className='btn-box'>
         <button type='button' onClick={changeData}>멘토 이름 바꾸기</button>
+        <button type='button' onClick={addData}>+ 멘토 추가 ﹢</button>
+        <button type='button' onClick={deleteData}>- 멘토 삭제 -</button>
       </div>
     </section>
   );
