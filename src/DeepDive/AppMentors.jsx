@@ -2,24 +2,7 @@ import React, { useState } from 'react';
 import './mentor.css';
 
 export default function AppMentors() {
-  const [_person, setPerson] = useState({
-    name: '인혜',
-    desc: '못말리는 장난꾸러기 🤦‍♀️',
-    mentor: [
-      {
-        name: '배고프다',
-        desc: '왜 인간은 매일 밥을 먹고 살아야 하지요??',
-      },
-      {
-        name: '참아보자',
-        desc: '쿠팡에서 대량 간식 칼로리 확인하기, 특이한 먹방 보기',
-      },
-      {
-        name: '기대하는중',
-        desc: '금요일 점심 딱 대',
-      },
-    ],
-  });
+  const [_person, setPerson] = useState(_initialData);
 
   const changeData = (e) => {
     const _prev = window.prompt(`🥸 아갓씌, 어느 분의 이름을 바꾸고 싶은가요?`);
@@ -37,7 +20,6 @@ export default function AppMentors() {
 
   /* [내가 생각한 답]
   - push로 해결
-  */
   const _addData = () => {
     const name = window.prompt('🥸 아갓씌, 새로운 분의 이름을 작성해주세요');
     if (name === '') return;
@@ -50,8 +32,9 @@ export default function AppMentors() {
 
     setPerson(_newData);
   };
+  */
 
-   /* [정답!]
+  /* [정답!]
   - 스프레드 문법으로 해결
   */
   const addData = () => {
@@ -69,7 +52,6 @@ export default function AppMentors() {
 
   /* [내가 생각한 답]
   - splice로 해결
-  */
   const _deleteData = () => {
     const _name = window.prompt('🥸 아갓씌, 집으로 돌아가실 분의 이름을 작성해주세요');
     if (_name === '') return;
@@ -82,6 +64,7 @@ export default function AppMentors() {
       setPerson(_newData);
     }
   };
+  */
 
   /* [정답!]
   - filter로 해결
@@ -126,3 +109,21 @@ export default function AppMentors() {
   );
 }
 
+const _initialData = {
+  name: '인혜',
+  desc: '못말리는 장난꾸러기 🤦‍♀️',
+  mentor: [
+    {
+      name: '배고프다',
+      desc: '왜 인간은 매일 밥을 먹고 살아야 하지요??',
+    },
+    {
+      name: '참아보자',
+      desc: '쿠팡에서 대량 간식 칼로리 확인하기, 특이한 먹방 보기',
+    },
+    {
+      name: '기대하는중',
+      desc: '금요일 점심 딱 대',
+    },
+  ],
+};
