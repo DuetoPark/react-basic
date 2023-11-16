@@ -35,7 +35,10 @@ export default function AppMentors() {
     setPerson(_newData);
   };
 
-  const addData = () => {
+  /* [내가 생각한 답]
+  - push로 해결
+  */
+  const _addData = () => {
     const name = window.prompt('🥸 아갓씌, 새로운 분의 이름을 작성해주세요');
     if (name === '') return;
 
@@ -48,7 +51,26 @@ export default function AppMentors() {
     setPerson(_newData);
   };
 
-  const deleteData = () => {
+   /* [정답!]
+  - 스프레드 문법으로 해결
+  */
+  const addData = () => {
+    const name = window.prompt('🥸 아갓씌, 새로운 분의 이름을 작성해주세요');
+    if (name === '') return;
+
+    const desc = window.prompt('🥸 아갓씌, 새로운 분의 설명을 작성해주세요');
+    if (desc === '') return;
+
+    setPerson(prev => ({
+      ...prev,
+      mentor: [...prev.mentor, {name, desc}],
+    }));
+  };
+
+  /* [내가 생각한 답]
+  - splice로 해결
+  */
+  const _deleteData = () => {
     const _name = window.prompt('🥸 아갓씌, 집으로 돌아가실 분의 이름을 작성해주세요');
     if (_name === '') return;
 
@@ -58,6 +80,21 @@ export default function AppMentors() {
       const _newData = {..._person};
       _newData.mentor.splice(_idx, 1);
       setPerson(_newData);
+    }
+  };
+
+  /* [정답!]
+  - filter로 해결
+  */
+  const deleteData = () => {
+    const _name = window.prompt('🥸 아갓씌, 집으로 돌아가실 분의 이름을 작성해주세요');
+    if (_name === '') return;
+
+    if (window.confirm(`🥸 아갓씌, 정말 ${_name}님을 집으로 보내고 싶은가요?`)) {
+      setPerson(_prev => ({
+        ..._prev,
+        mentor: _prev.mentor.filter(_item => _item.name !== _name),
+      }));
     }
   };
 
