@@ -1,40 +1,46 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import './mentor.css';
+import personReducer from '../Reducer/person-reducer';
+
+/*
+
+[리듀서]
+- function **Reducer (state, action) {
+  return 객체
+}
+- 🔥리듀서는 state를 받아서 newState를 반환🔥
+- state는 🔥불변🔥의 상태값
+- action은 객체로, 로직에 필요한 값이 담겨있다
+
+[useReducer]
+- state가 여럿 중첩되어 있어서 복잡한 경우에 사용
+
+- const [변수(상태값), dispatch] = useReducer(리듀서, 변수 초기값);
+- useReducer는 🔥currentState와 newState를 비교해서 서로 다르면 UI 변경됨.🔥
+
+- dispatch(action);
+- dispatch는 action(객체)를 전달
+
+*/
 
 export default function AppMentors() {
-  const [_person, setPerson] = useState(_initialData);
+  const [_person, dispatch] = useReducer(personReducer, _initialData)
 
-  const changeData = (e) => {
-    const _prev = window.prompt(`🥸 아갓씌, 어느 분의 이름을 바꾸고 싶은가요?`);
-    const _idx = _person.mentor.findIndex(_item => _item.name === _prev);
+  const changeData = () => {
+    const prev = window.prompt(`🥸 아갓씌, 어느 분의 이름을 바꾸고 싶은가요?`);
+    if (prev === '') return;
 
-    if (_idx === -1) return;
+    const current = window.prompt(`🥸 아갓씌, 이름을 무엇으로 바꾸고 싶은가요?`);
+    if (current === '') return;
 
-    const _current = window.prompt(`🥸 아갓씌, 이름을 무엇으로 바꾸고 싶은가요?`);
-    
-    const _newData = {..._person};
-    _newData.mentor[_idx].name = _current;
-
-    setPerson(_newData);
+    dispatch({type: 'updated', prev, current});
   };
 
-  /* [내가 생각한 답]
+  /*
+  [내가 생각한 답]
   - push로 해결
-  const _addData = () => {
-    const name = window.prompt('🥸 아갓씌, 새로운 분의 이름을 작성해주세요');
-    if (name === '') return;
-
-    const desc = window.prompt('🥸 아갓씌, 새로운 분의 설명을 작성해주세요');
-    if (desc === '') return;
-
-    const _newData = {..._person};
-    _newData.mentor.push({name, desc});
-
-    setPerson(_newData);
-  };
-  */
-
-  /* [정답!]
+  
+  [정답!]
   - 스프레드 문법으로 해결
   */
   const addData = () => {
@@ -44,40 +50,22 @@ export default function AppMentors() {
     const desc = window.prompt('🥸 아갓씌, 새로운 분의 설명을 작성해주세요');
     if (desc === '') return;
 
-    setPerson(prev => ({
-      ...prev,
-      mentor: [...prev.mentor, {name, desc}],
-    }));
+    dispatch({type: 'added', name, desc});
   };
 
-  /* [내가 생각한 답]
+  /* 
+  [내가 생각한 답]
   - splice로 해결
-  const _deleteData = () => {
-    const _name = window.prompt('🥸 아갓씌, 집으로 돌아가실 분의 이름을 작성해주세요');
-    if (_name === '') return;
 
-    const _idx = _person.mentor.findIndex(_item => _item.name === _name);
-
-    if (window.confirm(`🥸 아갓씌, 정말 ${_name}님을 집으로 보내고 싶은가요?`)) {
-      const _newData = {..._person};
-      _newData.mentor.splice(_idx, 1);
-      setPerson(_newData);
-    }
-  };
-  */
-
-  /* [정답!]
+  [정답!]
   - filter로 해결
   */
   const deleteData = () => {
-    const _name = window.prompt('🥸 아갓씌, 집으로 돌아가실 분의 이름을 작성해주세요');
-    if (_name === '') return;
+    const name = window.prompt('🥸 아갓씌, 집으로 돌아가실 분의 이름을 작성해주세요');
+    if (name === '') return;
 
-    if (window.confirm(`🥸 아갓씌, 정말 ${_name}님을 집으로 보내고 싶은가요?`)) {
-      setPerson(_prev => ({
-        ..._prev,
-        mentor: _prev.mentor.filter(_item => _item.name !== _name),
-      }));
+    if (window.confirm(`🥸 아갓씌, 정말 ${name}님을 집으로 보내고 싶은가요?`)) {
+      dispatch({type: 'deleted', name});
     }
   };
 
