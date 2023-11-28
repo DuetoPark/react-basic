@@ -1,40 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './product.css';
+import useProducts from '../../../hooks/use-products';
 
 export default function Product() {
-  const [_product, setProject] = useState([]);
   const [_isChecked, setChecked] = useState(false);
-  const [_isLoading, setLoading] = useState(false);
-  const [_isError, setError] = useState(undefined);
+  const [_isLoading, _isError, _product] = useProducts({salesOnly: _isChecked});
 
-  useEffect(() => {
-    setLoading(true);
-    setProject([]);
-    setError(undefined);
+  if (_isError) return <p className='error'>오늘 장사 안해요</p>
 
-    // NOTE: 세일(true)/일반(faㅣse) 리스트 호출
-    fetch(`datas/${_isChecked ? 'sale_' : ''}products.json`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      setProject(data);
-    })
-    .catch(() => {
-      setProject([]);
-      setError(true);
-    })
-    .finally(() => {
-      setLoading(false);
-    });
-    
-    return () => {
-      console.log('🤮지웠서용🤮');
-    }
-  }, [_isChecked]); // DependencyList
-
-  if (_isError) return <p>오늘 장사 안해요</p>
-
-  if (_isLoading) return <p>Loading!!!</p>
+  if (_isLoading) return <p className='loading'>Loading!!!</p>
 
   return (
     <section>
@@ -48,7 +22,8 @@ export default function Product() {
           <input
             type="checkbox"
             value={_isChecked}
-            onChange={() => setChecked(v => !v)} />
+            onChange={() => setChecked(v => !v)}
+            checked={_isChecked} />
           <span>세일 중인 상품만 보기</span>
         </label>
 
