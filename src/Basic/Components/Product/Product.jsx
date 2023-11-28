@@ -4,21 +4,37 @@ import './product.css';
 export default function Product() {
   const [_product, setProject] = useState([]);
   const [_isChecked, setChecked] = useState(false);
+  const [_isLoading, setLoading] = useState(false);
+  const [_isError, setError] = useState(undefined);
 
   useEffect(() => {
+    setLoading(true);
+    setProject([]);
+    setError(undefined);
+
     // NOTE: 세일(true)/일반(faㅣse) 리스트 호출
     fetch(`datas/${_isChecked ? 'sale_' : ''}products.json`)
     .then(res => res.json())
     .then(data => {
       console.log(data);
       setProject(data);
+    })
+    .catch(() => {
+      setProject([]);
+      setError(true);
+    })
+    .finally(() => {
+      setLoading(false);
     });
-
+    
     return () => {
       console.log('🤮지웠서용🤮');
     }
   }, [_isChecked]); // DependencyList
 
+  if (_isError) return <p>오늘 장사 안해요</p>
+
+  if (_isLoading) return <p>Loading!!!</p>
 
   return (
     <section>
