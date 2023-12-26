@@ -9,12 +9,16 @@ export default function Product() {
     isError,
     isLoading,
     data: _products,
-  } = useQuery(["products", _isChecked], async () => {
-    console.log("한번만 fetching 되지롱~~~!");
-    return fetch(`datas/${_isChecked ? "sale_" : ""}products.json`).then(
-      (res) => res.json()
-    );
-  });
+  } = useQuery(
+    ["products", _isChecked],
+    async () => {
+      console.log("한번만 fetching 되지롱~~~!");
+      return fetch(`datas/${_isChecked ? "sale_" : ""}products.json`).then(
+        (res) => res.json()
+      );
+    },
+    { staleTime: 1000 * 60 * 5, refetchOnWindowFocus: false }
+  );
 
   if (isError) return <p className="error">오늘 장사 안해요</p>;
 

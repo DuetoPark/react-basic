@@ -14,6 +14,7 @@ import reportWebVitals from "./reportWebVitals";
 import AppProduct from "./Basic/AppProduct";
 import MainProducts from "./Pages/MainProducts";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ root.render(
 
     <QueryClientProvider client={queryClient}>
       <MainProducts />
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </React.StrictMode>
 );
